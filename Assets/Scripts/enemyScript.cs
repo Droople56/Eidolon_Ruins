@@ -35,6 +35,14 @@ public class enemyScript : MonoBehaviour
                 targetPosition = t.transform.position;
             }
         }
+        if (targetPosition.y > position.y)
+            targetPosition.y -= .1f;
+        if (targetPosition.x < position.x)
+            targetPosition.x += .1f;
+        if (targetPosition.y < position.y)
+            targetPosition.y += .1f;
+        if (targetPosition.x > position.x)
+            targetPosition.x -= .1f;
     }
 
     // Update is called once per frame
@@ -42,37 +50,29 @@ public class enemyScript : MonoBehaviour
     {
         movement();
         transform.position = position;
-        Debug.Log("X: " + transform.position.x + " Y: " + transform.position.y);
+        //Debug.Log("X: " + transform.position.x + " Y: " + transform.position.y);
+        Debug.Log("X: " + position.x+ " Y: " + position.y);
+        Debug.Log("targetX: " + targetPosition.x + " targetY: " + targetPosition.y);
+
+        Debug.Log(direction);
     }
 
     void movement()
     {
-
-
-        if ((Mathf.Abs((targetPosition.y - position.y)) > .11f || Mathf.Abs((targetPosition.y - position.y)) < -.11f))
+        if (!hasMovedVertical)
         {
-            hasMovedVertical = false;
+            if (targetPosition.y > position.y)
+                direction = 0;
+            else if (targetPosition.y < position.y)
+                direction = 2;
         }
-        else if ((Mathf.Abs((targetPosition.x - position.x)) > .11f || Mathf.Abs((targetPosition.x - position.x)) < -.11f))
+        else if (!hasMovedHorizontal)
         {
-            hasMovedHorizontal = false;
+            if (targetPosition.x < position.x)
+                direction = 1;
+            else if (targetPosition.x > position.x)
+                direction = 3;
         }
-        else
-        {
-            hasMovedVertical = true;
-            hasMovedHorizontal = true;
-        }
-
-        if (targetPosition.y > position.y)
-            direction = 0;
-        else if (targetPosition.x < position.x)
-            direction = 1;
-        else if (targetPosition.y < position.y)
-            direction = 2;
-        else if (targetPosition.x > position.x)
-            direction = 3;
-
-        //Debug.Log(direction);
 
         if (!hasMovedVertical || !hasMovedHorizontal)
         {
@@ -87,7 +87,7 @@ public class enemyScript : MonoBehaviour
 
 
             //Debug.Log(Mathf.Abs((targetPosition.y - position.y)));
-            if (Mathf.Abs((targetPosition.y - position.y)) <= .01f)
+            if (Mathf.Abs((targetPosition.y - position.y)) <= .01f|| Mathf.Abs((targetPosition.y - position.y)) <= -.01f)
             {
                 position.y = position.y * 10;
                 position.y = Mathf.Round(position.y);
@@ -95,7 +95,7 @@ public class enemyScript : MonoBehaviour
                 isWalking = false;
                 hasMovedVertical = true;
             }
-            if (Mathf.Abs((targetPosition.x - position.x)) <= .01f)
+            if (Mathf.Abs((targetPosition.x - position.x)) <= .01f || Mathf.Abs((targetPosition.x - position.x)) <= -.01f)
             {
                 position.x = position.x * 10;
                 position.x = Mathf.Round(position.x);
@@ -104,15 +104,7 @@ public class enemyScript : MonoBehaviour
                 hasMovedHorizontal = true;
             }
         }
-        else
-        {
-            position.y = position.y * 10;
-            position.y = Mathf.Round(position.y);
-            position.y = position.y / 10;
-
-            position.x = position.x * 10;
-            position.x = Mathf.Round(position.x);
-            position.x = position.x / 10;
-        }
     }
+
+    //method to attack when reached target tower
 }

@@ -18,5 +18,6 @@ public class gameManagerScript : MonoBehaviour
 
     }
 
-    //method to spawn enemies
+    //method to spawn enemies on outer ring on random tiles
+
 }

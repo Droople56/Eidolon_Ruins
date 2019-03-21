@@ -7,8 +7,7 @@ public class playerScript : MonoBehaviour
     // Use this for initialization
     Vector2 position;
 
-    Vector2 gridPosition;
-    Vector2 velocity;
+
     bool isWalking;
     bool isWPressed;
     bool isAPressed;
@@ -16,15 +15,12 @@ public class playerScript : MonoBehaviour
     bool isDPressed;
     int direction;
     Vector2 targetPosition;
-    Vector2 previousTargetPosition;
+
     void Start()
     {
         position = this.transform.position;
-        gridPosition = position;
-        velocity = Vector2.zero;
         isWalking = false;
         targetPosition = position;
-        previousTargetPosition = position;
         isWPressed = false;
         isAPressed = false;
         isSPressed = false;
