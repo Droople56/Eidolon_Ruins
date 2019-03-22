@@ -50,11 +50,6 @@ public class enemyScript : MonoBehaviour
     {
         movement();
         transform.position = position;
-        //Debug.Log("X: " + transform.position.x + " Y: " + transform.position.y);
-        Debug.Log("X: " + position.x+ " Y: " + position.y);
-        Debug.Log("targetX: " + targetPosition.x + " targetY: " + targetPosition.y);
-
-        Debug.Log(direction);
     }
 
     void movement()
@@ -85,8 +80,6 @@ public class enemyScript : MonoBehaviour
             if (direction == 3)
                 position.x += .01f;
 
-
-            //Debug.Log(Mathf.Abs((targetPosition.y - position.y)));
             if (Mathf.Abs((targetPosition.y - position.y)) <= .01f|| Mathf.Abs((targetPosition.y - position.y)) <= -.01f)
             {
                 position.y = position.y * 10;

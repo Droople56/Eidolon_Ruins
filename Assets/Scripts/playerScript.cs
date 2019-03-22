@@ -32,10 +32,10 @@ public class playerScript : MonoBehaviour
     void Update()
     {
 
-        //movement();
+        
         movement();
         transform.position = position;
-        //Debug.Log("Tranform X: " + transform.position.x+ " Tranform Y: " + transform.position.y);
+        
     }
 
     void movement()
@@ -67,9 +67,11 @@ public class playerScript : MonoBehaviour
             direction = 3;
         }
 
+        //if released set player to not walk
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
             isWalking = false;
 
+        //if player is walking, move them in the direction they are going
         if (isWalking)
         {
             if (Input.GetKey(KeyCode.LeftShift))
@@ -99,6 +101,7 @@ public class playerScript : MonoBehaviour
         }
         else
         {
+            //if not walking, finish out the movement from the previous movement
             Vector2 tempPosition = Vector2.zero;
             if (direction == 0)
             {
@@ -134,6 +137,7 @@ public class playerScript : MonoBehaviour
                 targetPosition.x = tempPosition.x;
             }
 
+            //if within .01, round position to be on the grid
             if (Mathf.Abs(targetPosition.y) - Mathf.Abs(position.y) >= .01f || Mathf.Abs(targetPosition.y) - Mathf.Abs(position.y) <= -.01f || Mathf.Abs(targetPosition.x) - Mathf.Abs(position.x) >= .01f || Mathf.Abs(targetPosition.x) - Mathf.Abs(position.x) <= -.01f)
                 position = Vector2.MoveTowards(position, targetPosition, .01f);
             else
