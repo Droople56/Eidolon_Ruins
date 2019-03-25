@@ -159,4 +159,10 @@ public class playerScript : MonoBehaviour
             }
         }
     }
+
+    //This handles the firing of projectiles in a given deirection.
+    void attack()
+    {
+
+    }
 }

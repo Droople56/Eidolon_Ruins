@@ -100,4 +100,5 @@ public class enemyScript : MonoBehaviour
     }
 
     //method to attack when reached target tower
+
 }
