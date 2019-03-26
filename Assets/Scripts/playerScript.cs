@@ -13,9 +13,9 @@ public class playerScript : MonoBehaviour
     bool isAPressed;
     bool isSPressed;
     bool isDPressed;
-    int direction;
+    public int direction;
     Vector2 targetPosition;
-
+    public GameObject projectile;
     void Start()
     {
         position = this.transform.position;
@@ -35,7 +35,7 @@ public class playerScript : MonoBehaviour
         
         movement();
         transform.position = position;
-        
+        attack();
     }
 
     void movement()
@@ -149,7 +149,7 @@ public class playerScript : MonoBehaviour
                 isSPressed = false;
                 isDPressed = false;
 
-                //rounds position to a clean
+                //rounds position to nearest tenth when finished with movement
                 position.x = position.x * 10;
                 position.y = position.y * 10;
                 position.x = Mathf.Round(position.x);
@@ -160,9 +160,13 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    //This handles the firing of projectiles in a given deirection.
+    //This handles the firing of projectiles in a given direction.
     void attack()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectile, transform.position, transform.rotation);
 
+        }
     }
 }

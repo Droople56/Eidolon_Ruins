@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 1884234567505376630, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
       propertyPath: m_Name
-      value: Tower
+      value: Core
       objectReference: {fileID: 0}
     - target: {fileID: 8384763267096419007, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
@@ -197,7 +197,7 @@ PrefabInstance:
     - target: {fileID: 1884234567505376630, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
       propertyPath: m_Name
-      value: Tower (3)
+      value: Core3
       objectReference: {fileID: 0}
     - target: {fileID: 8384763267096419007, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
@@ -418,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 1884234567505376630, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
       propertyPath: m_Name
-      value: Tower (1)
+      value: Core1
       objectReference: {fileID: 0}
     - target: {fileID: 8384763267096419007, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 1884234567505376630, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
       propertyPath: m_Name
-      value: Tower (2)
+      value: Core2
       objectReference: {fileID: 0}
     - target: {fileID: 8384763267096419007, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
@@ -574,7 +574,7 @@ PrefabInstance:
     - target: {fileID: 1884234567505376630, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
       propertyPath: m_Name
-      value: Tower (4)
+      value: Core4
       objectReference: {fileID: 0}
     - target: {fileID: 8384763267096419007, guid: 9ea63f880878d774cafada68c44debad,
         type: 3}
@@ -706,6 +706,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2627745640521938077, guid: fd966e080d6bced428b0baf91c335817,
+        type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 1367918710770309101, guid: 2813d926f82cb5143a801cb678d493af,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd966e080d6bced428b0baf91c335817, type: 3}
 --- !u!1001 &3331613395706346101
@@ -775,10 +781,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9200279315823747370, guid: bfabc690d55cbff49aac8b046263aac8,
-        type: 3}
-      propertyPath: mScript
-      value: 
-      objectReference: {fileID: 531476294}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfabc690d55cbff49aac8b046263aac8, type: 3}

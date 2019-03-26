@@ -8,13 +8,15 @@ public class projectileScript : MonoBehaviour
     float speed;
     float damage;
     Vector2 position;
-
+    public GameObject plyr;
     // Start is called before the first frame update
     void Start()
     {
-        direction = -1;
-        speed = 0.15f;
+        plyr = GameObject.Find("Player");
+        direction = plyr.GetComponent<playerScript>().direction;
+        speed = 0.02f;
         damage = 1.0f;
+        position = plyr.GetComponent<playerScript>().transform.position;
     }
 
     // Update is called once per frame
@@ -23,7 +25,16 @@ public class projectileScript : MonoBehaviour
         go();
         transform.position = position;
     }
-
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        //when projectile collides with an enemy, call the reducehealth method within the enemy's script
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.SendMessage("reduceHealth", damage);
+            Destroy(gameObject);
+        }
+    }
     //Handle movement
     void go()
     {

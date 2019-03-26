@@ -12,9 +12,11 @@ public class enemyScript : MonoBehaviour
     int direction;
     bool hasMovedVertical;
     bool hasMovedHorizontal;
+    public int health;
     // Use this for initialization
     void Start()
     {
+        mScript = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
         targetPosition = Vector2.zero;
         distanceFromTowers = new Vector2(0, 1000);
         position = transform.position;
@@ -23,6 +25,7 @@ public class enemyScript : MonoBehaviour
         calculateTargetTower();
         hasMovedVertical = false;
         hasMovedHorizontal = false;
+        health = 5;
     }
 
     void calculateTargetTower()
@@ -99,6 +102,24 @@ public class enemyScript : MonoBehaviour
         }
     }
 
+    //method reduces enemy health when hit by projectile
+    void reduceHealth(int dmg)
+    {
+        health-=dmg;
+        if (health <= 0)
+        {
+            destroyEnemy();
+        }
+    }
+
+    //method to destroy enemy and call methods in manager to add score/money
+    void destroyEnemy()
+    {
+        //destroy enemy
+        Destroy(gameObject);
+        //call manager to reduce enemy count for wave
+        //call manager to add money to player's bank etc
+    }
     //method to attack when reached target tower
 
 }
