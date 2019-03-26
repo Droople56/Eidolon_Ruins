@@ -18,6 +18,6 @@ public class gameManagerScript : MonoBehaviour
 
     }
 
-    //method to spawn enemies on outer ring on random tiles
+    //method to spawn enemies on outer ring on random tiles (outer ring is ((-3,-2) (-3,2) (3,-2) (3,2)) only spawn on tenths aka (-3,.6) or (.3,2)
 
 }
