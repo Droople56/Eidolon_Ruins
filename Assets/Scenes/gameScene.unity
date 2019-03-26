@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3e49a5cbd92b43bd1d01e41303840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towers:
+  cores:
   - {fileID: 27741880}
   - {fileID: 945762769}
   - {fileID: 975237562}

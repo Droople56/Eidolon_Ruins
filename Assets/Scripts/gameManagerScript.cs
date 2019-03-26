@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class gameManagerScript : MonoBehaviour
 {
-    public List<GameObject> towers;
+    public List<GameObject> cores;
     public float test;
     // Use this for initialization
     void Start()

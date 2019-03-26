@@ -6,7 +6,7 @@ public class enemyScript : MonoBehaviour
 {
     public gameManagerScript mScript;
     Vector2 targetPosition;
-    Vector2 distanceFromTowers;
+    Vector2 distanceFromCores;
     Vector2 position;
     bool isWalking;
     int direction;
@@ -18,23 +18,23 @@ public class enemyScript : MonoBehaviour
     {
         mScript = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
         targetPosition = Vector2.zero;
-        distanceFromTowers = new Vector2(0, 1000);
+        distanceFromCores = new Vector2(0, 1000);
         position = transform.position;
         isWalking = false;
         direction = -1;
-        calculateTargetTower();
+        calculateTargetCore();
         hasMovedVertical = false;
         hasMovedHorizontal = false;
         health = 5;
     }
 
-    void calculateTargetTower()
+    void calculateTargetCore()
     {
-        foreach (var t in mScript.GetComponent<gameManagerScript>().towers)
+        foreach (var t in mScript.GetComponent<gameManagerScript>().cores)
         {
-            if ((transform.position - t.transform.position).magnitude < distanceFromTowers.magnitude)
+            if ((transform.position - t.transform.position).magnitude < distanceFromCores.magnitude)
             {
-                distanceFromTowers = transform.position - t.transform.position;
+                distanceFromCores = transform.position - t.transform.position;
                 targetPosition = t.transform.position;
             }
         }
