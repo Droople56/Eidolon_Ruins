@@ -120,6 +120,16 @@ public class enemyScript : MonoBehaviour
         //call manager to reduce enemy count for wave
         //call manager to add money to player's bank etc
     }
-    //method to attack when reached target tower
 
+    //method to attack when reached target tower
+    public void attack()
+    {
+        foreach (GameObject core in mScript.cores)
+        {
+            if (GetComponent<BoxCollider2D>().bounds.Intersects(core.GetComponent<BoxCollider2D>().bounds))
+            {
+                core.GetComponent<coreScript>().health--;
+            }
+        }
+    }
 }
