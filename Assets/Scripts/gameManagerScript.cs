@@ -6,10 +6,14 @@ public class gameManagerScript : MonoBehaviour
 {
     public List<GameObject> cores;
     public float test;
-    // Use this for initialization
-    void Start()
-    {
 
+    public List<GameObject> enemyList;
+
+    // Use this for initialization
+    void Awake()
+    {
+        cores = new List<GameObject>();
+        enemyList = new List<GameObject>();
     }
 
     // Update is called once per frame

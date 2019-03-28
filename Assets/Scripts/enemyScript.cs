@@ -17,6 +17,10 @@ public class enemyScript : MonoBehaviour
     void Start()
     {
         mScript = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
+
+        //add to a list of enemies
+        mScript.enemyList.Add(this.gameObject);
+
         targetPosition = Vector2.zero;
         distanceFromCores = new Vector2(0, 1000);
         position = transform.position;

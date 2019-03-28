@@ -5,11 +5,15 @@ using UnityEngine;
 public class coreScript : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    gameManagerScript manager;
     public int health;
 
     void Start()
     {
+        //add this to the list of cores
+        manager = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
+        manager.cores.Add(this.gameObject);
+
         health = 20;
     }
 
