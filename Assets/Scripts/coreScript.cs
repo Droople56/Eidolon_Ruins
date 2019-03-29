@@ -20,12 +20,18 @@ public class coreScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //die();
+        die();
+    }
+
+    //method reduces enemy health when hit by projectile
+    void reduceHealth(int dmg)
+    {
+        health -= dmg;
     }
 
     void die()
     {
-        if (health >= 0)
+        if (health <= 0)
         {
             Destroy(this.gameObject);
         }

@@ -13,6 +13,15 @@ public class enemyScript : MonoBehaviour
     bool hasMovedVertical;
     bool hasMovedHorizontal;
     public int health;
+
+    public GameObject projectile;
+    public List<GameObject> projectiles;
+
+    Vector2 projectileTargetPosition;
+
+    public int attackRate;
+    int makeAttack;
+
     // Use this for initialization
     void Start()
     {
@@ -30,6 +39,8 @@ public class enemyScript : MonoBehaviour
         hasMovedVertical = false;
         hasMovedHorizontal = false;
         health = 5;
+
+        attackRate = 120;
     }
 
     void calculateTargetCore()
@@ -38,8 +49,10 @@ public class enemyScript : MonoBehaviour
         {
             if ((transform.position - t.transform.position).magnitude < distanceFromCores.magnitude)
             {
+                
                 distanceFromCores = transform.position - t.transform.position;
                 targetPosition = t.transform.position;
+                projectileTargetPosition = t.transform.position;
             }
         }
         if (targetPosition.y > position.y)
@@ -57,6 +70,12 @@ public class enemyScript : MonoBehaviour
     {
         movement();
         transform.position = position;
+
+        if(isWalking == false)
+        {
+            MakeAttack();
+        }
+        
     }
 
     void movement()
@@ -128,12 +147,23 @@ public class enemyScript : MonoBehaviour
     //method to attack when reached target tower
     public void attack()
     {
-        foreach (GameObject core in mScript.cores)
+        GameObject newProjectile = Instantiate(projectile,this.position, Quaternion.identity);
+
+        newProjectile.GetComponent<enemyProjectileScript>().position = this.position;
+
+        Vector2 dir = projectileTargetPosition - this.position;
+        dir.Normalize();
+
+        newProjectile.GetComponent<enemyProjectileScript>().direction = dir;
+    }
+
+    public void MakeAttack()
+    {
+        makeAttack++;
+        if (makeAttack > attackRate)
         {
-            if (GetComponent<BoxCollider2D>().bounds.Intersects(core.GetComponent<BoxCollider2D>().bounds))
-            {
-                core.GetComponent<coreScript>().health--;
-            }
+            attack();
+            makeAttack = 0;
         }
     }
 }

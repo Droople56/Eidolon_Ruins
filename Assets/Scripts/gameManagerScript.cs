@@ -12,7 +12,7 @@ public class gameManagerScript : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        cores = new List<GameObject>();
+        //cores = new List<GameObject>();
         enemyList = new List<GameObject>();
     }
 
