@@ -16,6 +16,7 @@ public class enemyScript : MonoBehaviour
 
     public GameObject projectile;
     public List<GameObject> projectiles;
+    public GameObject targetCore;
 
     Vector2 projectileTargetPosition;
 
@@ -45,16 +46,25 @@ public class enemyScript : MonoBehaviour
 
     void calculateTargetCore()
     {
-        foreach (var t in mScript.GetComponent<gameManagerScript>().cores)
+        targetPosition = Vector2.zero;
+        distanceFromCores = new Vector2(100, 100);
+
+        foreach (GameObject t in mScript.GetComponent<gameManagerScript>().cores)
         {
-            if ((transform.position - t.transform.position).magnitude < distanceFromCores.magnitude)
+            if (t != null)
             {
-                
-                distanceFromCores = transform.position - t.transform.position;
-                targetPosition = t.transform.position;
-                projectileTargetPosition = t.transform.position;
+                if ((transform.position - t.transform.position).magnitude < distanceFromCores.magnitude)
+                {
+
+                    distanceFromCores = transform.position - t.transform.position;
+                    targetPosition = t.transform.position;
+                    projectileTargetPosition = t.transform.position;
+                    targetCore = t;
+                }
             }
+            
         }
+
         if (targetPosition.y > position.y)
             targetPosition.y -= .1f;
         if (targetPosition.x < position.x)
@@ -63,6 +73,8 @@ public class enemyScript : MonoBehaviour
             targetPosition.y += .1f;
         if (targetPosition.x > position.x)
             targetPosition.x -= .1f;
+
+        Debug.Log("I'm fucking gay");
     }
 
     // Update is called once per frame
@@ -71,11 +83,16 @@ public class enemyScript : MonoBehaviour
         movement();
         transform.position = position;
 
-        if(isWalking == false)
+        if(isWalking == false && targetCore != null)
         {
             MakeAttack();
         }
-        
+
+        if (targetCore == null)
+        {
+            calculateTargetCore();
+        }
+
     }
 
     void movement()
