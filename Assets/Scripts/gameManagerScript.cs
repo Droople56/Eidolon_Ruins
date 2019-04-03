@@ -22,12 +22,12 @@ public class gameManagerScript : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        waveNumber = 1;
+        waveNumber = 0;
         spawnLocation = Vector2.zero;
         spawnTimer = 0;
         //this method call will be moved later once we have a game loop that continually generates waves once the previous is beaten
         setupWave();
-        //cores = new List<GameObject>();
+        
         enemyList = new List<GameObject>();
     }
 
@@ -40,8 +40,11 @@ public class gameManagerScript : MonoBehaviour
 
     void setupWave()
     {
+        //increases wave number, sets number of enemies to be spawned and syncs enemies remaining with that number, resets spawn timer to zero
+        waveNumber++;
         numEnemiesToSpawn = waveNumber * 2 + 2;
         enemiesRemaining = numEnemiesToSpawn;
+        spawnTimer = 0;
     }
 
     //method to spawn enemies on outer ring on random tiles (outer ring is ((-3,-2) (-3,2) (3,-2) (3,2)) only spawn on tenths aka (-3,.6) or (.3,2)
@@ -97,7 +100,13 @@ public class gameManagerScript : MonoBehaviour
             spawnTimer = 0;
         }
 
-
+        if (enemiesRemaining == 0)
+        {
+            //sets up next wave's numbers
+            setupWave();
+            //call method that is while loop containing the shop
+        }
+            
 
     }
 }

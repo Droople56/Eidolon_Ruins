@@ -37,5 +37,8 @@ public class enemyProjectileScript : MonoBehaviour
         position = transform.position;
         position += direction * speed;
         transform.position = position;
+
+        if (position.x > 3 || position.x < -3 || position.y > 2 || position.y < -2)
+            Destroy(gameObject);
     }
 }
