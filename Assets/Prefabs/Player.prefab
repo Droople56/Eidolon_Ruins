@@ -92,3 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bece5581137fdef46b9263f19c57584e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
+  projectile: {fileID: 1367918710770309101, guid: 2813d926f82cb5143a801cb678d493af,
+    type: 3}
+  up: {fileID: 21300000, guid: 6f0d09456daa2c9459d12d4db70b4ef2, type: 3}
+  left: {fileID: 21300000, guid: 6eb55678fd8d0514682d8626d74f8652, type: 3}
+  down: {fileID: 21300000, guid: 852d33752b00e4046a206a7a8c6c80ac, type: 3}
+  right: {fileID: 21300000, guid: 4bbfb31d833a60344a3fe9995cc5c151, type: 3}

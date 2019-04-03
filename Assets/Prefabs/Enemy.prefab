@@ -96,6 +96,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mScript: {fileID: 0}
   health: 0
+  projectile: {fileID: 1367918710770309101, guid: f65fcbf74dd1d0a4aa53a65fe64680ad,
+    type: 3}
+  projectiles: []
+  targetCore: {fileID: 0}
+  attackRate: 0
+  up: {fileID: 21300000, guid: a074a165b004a8e4b9ad64e20c46e78d, type: 3}
+  left: {fileID: 21300000, guid: c5c32dc408b62a9479335d49c1c191a7, type: 3}
+  down: {fileID: 21300000, guid: 3db7807c574b0484bace6adea22dd7cc, type: 3}
+  right: {fileID: 21300000, guid: c0c4af717251eb649a5384bab5093abb, type: 3}
 --- !u!61 &8891358119926467430
 BoxCollider2D:
   m_ObjectHideFlags: 0

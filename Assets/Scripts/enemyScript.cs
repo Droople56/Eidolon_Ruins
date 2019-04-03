@@ -23,6 +23,10 @@ public class enemyScript : MonoBehaviour
     public int attackRate;
     int makeAttack;
 
+    public Sprite up;
+    public Sprite left;
+    public Sprite down;
+    public Sprite right;
     // Use this for initialization
     void Start()
     {
@@ -42,6 +46,19 @@ public class enemyScript : MonoBehaviour
         health = 5;
 
         attackRate = 120;
+    }
+
+    private void changeSprite()
+    {
+        if (direction == 0)
+            gameObject.GetComponent<SpriteRenderer>().sprite = up;
+        else if (direction == 1)
+            gameObject.GetComponent<SpriteRenderer>().sprite = left;
+        else if (direction == 2)
+            gameObject.GetComponent<SpriteRenderer>().sprite = down;
+        else if (direction == 3)
+            gameObject.GetComponent<SpriteRenderer>().sprite = right;
+
     }
 
     void calculateTargetCore()
@@ -74,13 +91,14 @@ public class enemyScript : MonoBehaviour
         if (targetPosition.x > position.x)
             targetPosition.x -= .1f;
 
-        Debug.Log("I'm fucking gay");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         movement();
+        changeSprite();
         transform.position = position;
 
         if(isWalking == false && targetCore != null)
@@ -90,7 +108,10 @@ public class enemyScript : MonoBehaviour
 
         if (targetCore == null)
         {
+
             calculateTargetCore();
+            hasMovedHorizontal = false;
+            hasMovedVertical = false;
         }
 
     }

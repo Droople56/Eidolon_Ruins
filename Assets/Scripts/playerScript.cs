@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,11 @@ public class playerScript : MonoBehaviour
     public int direction;
     Vector2 targetPosition;
     public GameObject projectile;
+
+    public Sprite up;
+    public Sprite left;
+    public Sprite down;
+    public Sprite right;
     void Start()
     {
         position = this.transform.position;
@@ -34,8 +40,22 @@ public class playerScript : MonoBehaviour
 
         
         movement();
+        changeSprite();
         transform.position = position;
         attack();
+    }
+
+    private void changeSprite()
+    {
+        if(direction == 0)
+            gameObject.GetComponent<SpriteRenderer>().sprite = up;
+        else if(direction==1)
+            gameObject.GetComponent<SpriteRenderer>().sprite = left;
+        else if(direction==2)
+            gameObject.GetComponent<SpriteRenderer>().sprite = down;
+        else if(direction==3)
+            gameObject.GetComponent<SpriteRenderer>().sprite = right;
+
     }
 
     void movement()
@@ -88,13 +108,13 @@ public class playerScript : MonoBehaviour
             else
             {
                 if (isWPressed)
-                    position.y += .01f;
+                    position.y += .02f;
                 if (isAPressed)
-                    position.x -= .01f;
+                    position.x -= .02f;
                 if (isSPressed)
-                    position.y -= .01f;
+                    position.y -= .02f;
                 if (isDPressed)
-                    position.x += .01f;
+                    position.x += .02f;
             }
             //moves player the direction they move
 
