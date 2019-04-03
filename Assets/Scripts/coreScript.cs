@@ -10,11 +10,9 @@ public class coreScript : MonoBehaviour
 
     void Start()
     {
-        //add this to the list of cores
-        manager = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
-        manager.cores.Add(this.gameObject);
 
-        health = 3;
+
+        health = 15;
     }
 
     // Update is called once per frame

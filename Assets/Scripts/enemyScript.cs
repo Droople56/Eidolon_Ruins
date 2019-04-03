@@ -136,13 +136,13 @@ public class enemyScript : MonoBehaviour
         if (!hasMovedVertical || !hasMovedHorizontal)
         {
             if (direction == 0)
-                position.y += .01f;
+                position.y += .005f;
             if (direction == 1)
-                position.x -= .01f;
+                position.x -= .005f;
             if (direction == 2)
-                position.y -= .01f;
+                position.y -= .005f;
             if (direction == 3)
-                position.x += .01f;
+                position.x += .005f;
 
             if (Mathf.Abs((targetPosition.y - position.y)) <= .01f|| Mathf.Abs((targetPosition.y - position.y)) <= -.01f)
             {
@@ -176,9 +176,12 @@ public class enemyScript : MonoBehaviour
     //method to destroy enemy and call methods in manager to add score/money
     void destroyEnemy()
     {
+        //remove from enemy list
+        mScript.enemyList.Remove(gameObject);
         //destroy enemy
         Destroy(gameObject);
         //call manager to reduce enemy count for wave
+        mScript.enemiesRemaining--;
         //call manager to add money to player's bank etc
     }
 

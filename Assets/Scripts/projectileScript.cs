@@ -14,7 +14,7 @@ public class projectileScript : MonoBehaviour
     {
         plyr = GameObject.Find("Player");
         direction = plyr.GetComponent<playerScript>().direction;
-        speed = 0.02f;
+        speed = 0.04f;
         damage = 1.0f;
         position = plyr.GetComponent<playerScript>().transform.position;
     }
@@ -58,5 +58,8 @@ public class projectileScript : MonoBehaviour
         {
             position.x += speed;
         }
+
+        if (position.x > 3 || position.x < -3 || position.y > 2 || position.y < -2)
+            Destroy(gameObject);
     }
 }
