@@ -22,6 +22,8 @@ public class towerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("gameManager").GetComponent<gameManagerScript>().towerList.Add(this);
+
         if (direction == "")
         {
             direction = "right";
@@ -29,8 +31,6 @@ public class towerScript : MonoBehaviour
         }
 
         currentTime = fireRate/2.0f;
-
-        
 
         DetermineDirection();
     }
