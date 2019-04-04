@@ -23,6 +23,8 @@ public class enemyScript : MonoBehaviour
     public int attackRate;
     int makeAttack;
 
+    public int score = 10;
+
     public Sprite up;
     public Sprite left;
     public Sprite down;
@@ -182,7 +184,12 @@ public class enemyScript : MonoBehaviour
         Destroy(gameObject);
         //call manager to reduce enemy count for wave
         mScript.enemiesRemaining--;
+
         //call manager to add money to player's bank etc
+        gameManagerScript manager = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
+        manager.score += score;
+        manager.scoreText.text = "Score: " + manager.score;
+        
     }
 
     //method to attack when reached target tower

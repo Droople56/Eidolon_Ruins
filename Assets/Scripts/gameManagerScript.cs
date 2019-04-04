@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManagerScript : MonoBehaviour
 {
@@ -13,22 +14,37 @@ public class gameManagerScript : MonoBehaviour
     public int enemiesRemaining;
     public int numEnemiesToSpawn;
 
+    public List<towerScript> towerList;
+
     int spawnDirection;
     float spawnDirection2;
     public GameObject enemyReference;
     Vector2 spawnLocation;
     public int spawnTimer;
+
+    GameObject nextWaveButton;
+
+    [HideInInspector] public int score;
+    [HideInInspector] public Text scoreText;
     
     // Use this for initialization
     void Awake()
     {
+        score = 0;
+        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+
         waveNumber = 0;
         spawnLocation = Vector2.zero;
         spawnTimer = 0;
+
+        nextWaveButton = GameObject.Find("NextWaveButton");
+
         //this method call will be moved later once we have a game loop that continually generates waves once the previous is beaten
         setupWave();
         
         enemyList = new List<GameObject>();
+        //cores = new List<GameObject>();
+        towerList = new List<towerScript>();
     }
 
 
@@ -38,13 +54,34 @@ public class gameManagerScript : MonoBehaviour
         spawnEnemies();
     }
 
-    void setupWave()
+    public void setupWave()
     {
         //increases wave number, sets number of enemies to be spawned and syncs enemies remaining with that number, resets spawn timer to zero
         waveNumber++;
         numEnemiesToSpawn = waveNumber * 2 + 2;
         enemiesRemaining = numEnemiesToSpawn;
         spawnTimer = 0;
+
+        //disable button
+        nextWaveButton.SetActive(false);
+
+        //enable towers
+        foreach(towerScript tower in towerList)
+        {
+            tower.enabled = true;
+        }
+    }
+
+    void ShopScreen()
+    {
+        //disable our towers
+        foreach(towerScript tower in towerList)
+        {
+            tower.enabled = false;
+        }
+
+        //show the next wave button
+        nextWaveButton.SetActive(true);
     }
 
     //method to spawn enemies on outer ring on random tiles (outer ring is ((-3,-2) (-3,2) (3,-2) (3,2)) only spawn on tenths aka (-3,.6) or (.3,2)
@@ -103,7 +140,7 @@ public class gameManagerScript : MonoBehaviour
         if (enemiesRemaining == 0)
         {
             //sets up next wave's numbers
-            setupWave();
+            ShopScreen();
             //call method that is while loop containing the shop
         }
             
