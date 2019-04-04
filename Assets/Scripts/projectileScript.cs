@@ -14,8 +14,8 @@ public class projectileScript : MonoBehaviour
     {
         plyr = GameObject.Find("Player");
         direction = plyr.GetComponent<playerScript>().direction;
-        speed = 0.04f;
-        damage = 1.0f;
+        speed = 0.03f;
+        damage = 2.0f;
         position = plyr.GetComponent<playerScript>().transform.position;
     }
 
@@ -31,8 +31,11 @@ public class projectileScript : MonoBehaviour
         //when projectile collides with an enemy, call the reducehealth method within the enemy's script
         if (collision.gameObject.tag == "Enemy")
         {
+            
             collision.gameObject.SendMessage("reduceHealth", damage);
             Destroy(gameObject);
+            plyr.GetComponent<playerScript>().numOfProjectiles--;
+
         }
     }
     //Handle movement
@@ -60,6 +63,10 @@ public class projectileScript : MonoBehaviour
         }
 
         if (position.x > 3 || position.x < -3 || position.y > 2 || position.y < -2)
+        {
             Destroy(gameObject);
+            plyr.GetComponent<playerScript>().numOfProjectiles--;
+        }
+            
     }
 }

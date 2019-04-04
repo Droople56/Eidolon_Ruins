@@ -17,7 +17,7 @@ public class playerScript : MonoBehaviour
     public int direction;
     Vector2 targetPosition;
     public GameObject projectile;
-
+    public int numOfProjectiles;
     public Sprite up;
     public Sprite left;
     public Sprite down;
@@ -32,6 +32,7 @@ public class playerScript : MonoBehaviour
         isSPressed = false;
         isDPressed = false;
         direction = 0;
+        numOfProjectiles = 0;
     }
 
     // Update is called once per frame
@@ -183,10 +184,10 @@ public class playerScript : MonoBehaviour
     //This handles the firing of projectiles in a given direction.
     void attack()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)||Input.GetMouseButtonDown(0)&&numOfProjectiles<5)
         {
             Instantiate(projectile, transform.position, transform.rotation);
-
+            numOfProjectiles++;
         }
     }
 }

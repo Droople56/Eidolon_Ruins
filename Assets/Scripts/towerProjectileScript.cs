@@ -33,21 +33,20 @@ public class towerProjectileScript : MonoBehaviour
     void Update()
     {
         this.transform.position += speed * movementVector;
+        if (transform.position.x > 3 || transform.position.x < -3 || transform.position.y > 2 || transform.position.y < -2)
+            Destroy(gameObject);
     }
 
 
-    void CheckEnemyCollisions()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        Bounds pBounds = GetComponent<SpriteRenderer>().bounds;
 
-        foreach(GameObject enemy in manager.enemyList)
+        //when projectile collides with an enemy, call the reducehealth method within the enemy's script
+        if (collision.gameObject.tag == "Enemy")
         {
-            Bounds eBounds = enemy.GetComponent<SpriteRenderer>().bounds;
-            if (pBounds.Intersects(eBounds))
-            {
-                enemy.GetComponent<enemyScript>().health -= damage;
-                Debug.Log("hitski");
-            }
+            
+            collision.gameObject.SendMessage("reduceHealth", damage);
+            Destroy(gameObject);
         }
     }
 }

@@ -15,8 +15,8 @@ public class towerScript : MonoBehaviour
     public float fireRate;
     float currentTime;
 
-    public int damage = 0;
-    public float speed = 0.01f;
+    public int damage = 1;
+    public float speed = 0.02f;
 
 
     // Start is called before the first frame update

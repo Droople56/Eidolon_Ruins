@@ -8,7 +8,7 @@ public class enemyScript : MonoBehaviour
     Vector2 targetPosition;
     Vector2 distanceFromCores;
     Vector2 position;
-    bool isWalking;
+
     int direction;
     bool hasMovedVertical;
     bool hasMovedHorizontal;
@@ -38,12 +38,12 @@ public class enemyScript : MonoBehaviour
         targetPosition = Vector2.zero;
         distanceFromCores = new Vector2(0, 1000);
         position = transform.position;
-        isWalking = false;
+
         direction = -1;
         calculateTargetCore();
         hasMovedVertical = false;
         hasMovedHorizontal = false;
-        health = 5;
+        health = 8;
 
         attackRate = 120;
     }
@@ -98,10 +98,12 @@ public class enemyScript : MonoBehaviour
     void Update()
     {
         movement();
+        //resets rotation after every movement cuz for some reason its rotating them 
+        transform.rotation = Quaternion.identity;
         changeSprite();
         transform.position = position;
 
-        if(isWalking == false && targetCore != null)
+        if (hasMovedHorizontal == true && hasMovedVertical == true && targetCore != null)
         {
             MakeAttack();
         }
@@ -149,7 +151,6 @@ public class enemyScript : MonoBehaviour
                 position.y = position.y * 10;
                 position.y = Mathf.Round(position.y);
                 position.y = position.y / 10;
-                isWalking = false;
                 hasMovedVertical = true;
             }
             if (Mathf.Abs((targetPosition.x - position.x)) <= .01f || Mathf.Abs((targetPosition.x - position.x)) <= -.01f)
@@ -157,7 +158,6 @@ public class enemyScript : MonoBehaviour
                 position.x = position.x * 10;
                 position.x = Mathf.Round(position.x);
                 position.x = position.x / 10;
-                isWalking = false;
                 hasMovedHorizontal = true;
             }
         }
