@@ -9,18 +9,29 @@ public class enemyProjectileScript : MonoBehaviour
     public Vector2 direction;
     public Vector2 position;
     public GameObject manager;
-
+    public gameManagerScript mScript;
     // Start is called before the first frame update
     void Start()
     {
+        mScript = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
         speed = 0.01f;
-        damage = 1.0f;
+        if (mScript.waveNumber < 10)
+        {
+            damage = 1.0f;
+        }
+        else
+        {
+            damage = (mScript.waveNumber / 10)+1;
+        }
+        
+        Debug.Log(damage);
     }
 
     // Update is called once per frame
     void Update()
     {
         go();
+        
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

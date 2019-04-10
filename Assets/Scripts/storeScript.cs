@@ -56,13 +56,19 @@ public class storeScript : MonoBehaviour
             {
                 tower.speed = currentTowerSpeed;
             }
-
+            foreach (towerScript tower in towers)
+            {
+                if (tower.fireRate > .1f)
+                    tower.fireRate -= .1f;
+            }
             //subtract cost of upgrade
             manager.score -= pSpeedCost;
 
             //increment cost
-            pSpeedCost += 100;
+            pSpeedCost += 20;
         }
+
+
     }
 
     //Projectile Damage
@@ -82,7 +88,7 @@ public class storeScript : MonoBehaviour
             manager.score -= pDamageCost;
 
             //increment cost
-            pDamageCost += 100;
+            pDamageCost += 20;
         }
     }
 

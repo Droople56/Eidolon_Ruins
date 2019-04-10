@@ -60,7 +60,7 @@ public class gameManagerScript : MonoBehaviour
     {
         //increases wave number, sets number of enemies to be spawned and syncs enemies remaining with that number, resets spawn timer to zero
         waveNumber++;
-        numEnemiesToSpawn = waveNumber * 2 + 2;
+        numEnemiesToSpawn = waveNumber +2;
         enemiesRemaining = numEnemiesToSpawn;
         spawnTimer = 0;
 

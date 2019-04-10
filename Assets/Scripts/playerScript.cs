@@ -225,6 +225,6 @@ public class playerScript : MonoBehaviour
             aimDirection = 3;
         }
 
-        Debug.Log(mousePos.x + " : " + mousePos.y);
+        
     }
 }

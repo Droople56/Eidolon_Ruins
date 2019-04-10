@@ -15,7 +15,7 @@ public class projectileScript : MonoBehaviour
         plyr = GameObject.Find("Player");
         direction = plyr.GetComponent<playerScript>().aimDirection;
         speed = 0.03f;
-        damage = 2.0f;
+        damage = 1.0f;
         position = plyr.GetComponent<playerScript>().transform.position;
     }
 

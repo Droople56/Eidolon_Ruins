@@ -48,9 +48,9 @@ public class enemyScript : MonoBehaviour
         //calculateTargetCore();
         hasMovedVertical = false;
         hasMovedHorizontal = false;
-        health = 8;
+        health = mScript.waveNumber+1;
         hasEnteredMansion = false;
-
+        Debug.Log(health);
         attackRate = 120;
         calculateDoorway();
 
