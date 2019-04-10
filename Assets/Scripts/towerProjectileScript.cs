@@ -25,8 +25,6 @@ public class towerProjectileScript : MonoBehaviour
         movementVector = parentTower.dVector;
         damage = parentTower.damage;
         speed = parentTower.speed;
-
-        manager = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
     }
 
     // Update is called once per frame

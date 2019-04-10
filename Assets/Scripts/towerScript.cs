@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class towerScript : MonoBehaviour
 {
+    gameManagerScript manager;
+    storeScript store;
+
     public GameObject towerProjectilePrefab;
 
     //can set the direction in the inspector
@@ -22,7 +25,12 @@ public class towerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.Find("gameManager").GetComponent<gameManagerScript>().towerList.Add(this);
+        manager = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
+        manager.towerList.Add(this);
+
+        store = GameObject.Find("gameManager").GetComponent<storeScript>();
+        this.damage = store.currentTowerDamage;
+        this.speed = store.currentTowerSpeed;
 
         if (direction == "")
         {
