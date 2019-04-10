@@ -7,13 +7,15 @@ public class enemyScript : MonoBehaviour
     public gameManagerScript mScript;
     Vector2 targetPosition;
     Vector2 distanceFromCores;
+    Vector2 distanceFromDoors;
     Vector2 position;
 
     int direction;
     bool hasMovedVertical;
     bool hasMovedHorizontal;
     public int health;
-
+    bool hasEnteredMansion;
+    int spawnDirection;
     public GameObject projectile;
     public List<GameObject> projectiles;
     public GameObject targetCore;
@@ -39,15 +41,19 @@ public class enemyScript : MonoBehaviour
 
         targetPosition = Vector2.zero;
         distanceFromCores = new Vector2(0, 1000);
+        distanceFromDoors = new Vector2(0, 1000);
         position = transform.position;
 
         direction = -1;
-        calculateTargetCore();
+        //calculateTargetCore();
         hasMovedVertical = false;
         hasMovedHorizontal = false;
         health = 8;
+        hasEnteredMansion = false;
 
         attackRate = 120;
+        calculateDoorway();
+
     }
 
     private void changeSprite()
@@ -61,6 +67,26 @@ public class enemyScript : MonoBehaviour
         else if (direction == 3)
             gameObject.GetComponent<SpriteRenderer>().sprite = right;
 
+    }
+
+    void calculateDoorway()
+    {
+        targetPosition = Vector2.zero;
+        distanceFromDoors = new Vector2(0, 1000);
+
+        foreach (GameObject d in mScript.GetComponent<gameManagerScript>().doorways)
+        {
+            if (d != null)
+            {
+                if ((transform.position - d.transform.position).magnitude < distanceFromDoors.magnitude)
+                {
+
+                    distanceFromDoors = transform.position - d.transform.position;
+                    targetPosition = d.transform.position;
+                }
+            }
+
+        }
     }
 
     void calculateTargetCore()
@@ -81,7 +107,7 @@ public class enemyScript : MonoBehaviour
                     targetCore = t;
                 }
             }
-            
+
         }
 
         if (targetPosition.y > position.y)
@@ -92,6 +118,8 @@ public class enemyScript : MonoBehaviour
             targetPosition.y += .1f;
         if (targetPosition.x > position.x)
             targetPosition.x -= .1f;
+        
+
 
         
     }
@@ -110,7 +138,7 @@ public class enemyScript : MonoBehaviour
             MakeAttack();
         }
 
-        if (targetCore == null)
+        if (targetCore == null && hasEnteredMansion)
         {
 
             calculateTargetCore();
@@ -122,6 +150,7 @@ public class enemyScript : MonoBehaviour
 
     void movement()
     {
+
         if (!hasMovedVertical)
         {
             if (targetPosition.y > position.y)
@@ -136,6 +165,7 @@ public class enemyScript : MonoBehaviour
             else if (targetPosition.x > position.x)
                 direction = 3;
         }
+
 
         if (!hasMovedVertical || !hasMovedHorizontal)
         {
@@ -154,6 +184,8 @@ public class enemyScript : MonoBehaviour
                 position.y = Mathf.Round(position.y);
                 position.y = position.y / 10;
                 hasMovedVertical = true;
+                spawnDirection = 0;
+                
             }
             if (Mathf.Abs((targetPosition.x - position.x)) <= .01f || Mathf.Abs((targetPosition.x - position.x)) <= -.01f)
             {
@@ -161,7 +193,10 @@ public class enemyScript : MonoBehaviour
                 position.x = Mathf.Round(position.x);
                 position.x = position.x / 10;
                 hasMovedHorizontal = true;
+                spawnDirection = 1;
             }
+            if (position == targetPosition)
+                hasEnteredMansion = true;
         }
     }
 

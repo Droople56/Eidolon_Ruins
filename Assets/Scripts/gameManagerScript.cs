@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class gameManagerScript : MonoBehaviour
 {
     public List<GameObject> cores;
+    public List<GameObject> doorways;
     public float test;
 
     public List<GameObject> enemyList;
@@ -45,6 +46,7 @@ public class gameManagerScript : MonoBehaviour
         enemyList = new List<GameObject>();
         //cores = new List<GameObject>();
         towerList = new List<towerScript>();
+        
     }
 
 
@@ -92,40 +94,34 @@ public class gameManagerScript : MonoBehaviour
         if (numEnemiesToSpawn > 0&&spawnTimer==120)
         {
             //select random number to see if spawn on top, left, bottom, or right of screen
-            spawnDirection = Random.Range(0, 4);
+            spawnDirection = Random.Range(0, 5);
 
             //depending on selection, enemy is placed on one of the sides of the outer spawning rectangle
             if (spawnDirection == 0)
             {
                 spawnLocation.y = 2;
-                spawnDirection2 = Random.Range(-3, 3);
+                spawnLocation.x = -1;
             }
             else if (spawnDirection == 1)
             {
                 spawnLocation.x = -3;
-                spawnDirection2 = Random.Range(-2, 2);
+                spawnLocation.y = -.2f;
             }
             else if (spawnDirection == 2)
             {
                 spawnLocation.y = -2;
-                spawnDirection2 = Random.Range(-3, 3);
+                spawnLocation.x = -0.6f;
             }
             else if (spawnDirection == 3)
             {
                 spawnLocation.x = 3;
-                spawnDirection2 = Random.Range(-2, 2);
+                spawnLocation.y = 0.4f;
             }
-
-            //rounds spawn direction 2 to an even tenth of a number
-            spawnDirection2 = spawnDirection2 * 10;
-            spawnDirection2 = Mathf.Round(spawnDirection2);
-            spawnDirection2 = spawnDirection2 / 10;
-
-            //set final spawn location
-            if (spawnDirection == 0 || spawnDirection == 2)
-                spawnLocation.x = spawnDirection2;
-            else if (spawnDirection == 2 || spawnDirection == 3)
-                spawnLocation.y = spawnDirection2;
+            else if (spawnDirection == 4)
+            {
+                spawnLocation.y = -2;
+                spawnLocation.x = 1.2f;
+            }
 
             //spawn enemy using this location
             enemyList.Add(Instantiate(enemyReference, spawnLocation, Quaternion.identity));
