@@ -13,7 +13,7 @@ public class projectileScript : MonoBehaviour
     void Start()
     {
         plyr = GameObject.Find("Player");
-        direction = plyr.GetComponent<playerScript>().direction;
+        direction = plyr.GetComponent<playerScript>().aimDirection;
         speed = 0.03f;
         damage = 2.0f;
         position = plyr.GetComponent<playerScript>().transform.position;

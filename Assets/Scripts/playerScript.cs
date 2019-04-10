@@ -8,6 +8,7 @@ public class playerScript : MonoBehaviour
     // Use this for initialization
     Vector2 position;
 
+    public Camera cam;
 
     bool isWalking;
     bool isWPressed;
@@ -15,6 +16,7 @@ public class playerScript : MonoBehaviour
     bool isSPressed;
     bool isDPressed;
     public int direction;
+    public int aimDirection;
     Vector2 targetPosition;
     public GameObject projectile;
     public int numOfProjectiles;
@@ -32,7 +34,9 @@ public class playerScript : MonoBehaviour
         isSPressed = false;
         isDPressed = false;
         direction = 0;
+        aimDirection = 0;
         numOfProjectiles = 0;
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -43,18 +47,19 @@ public class playerScript : MonoBehaviour
         movement();
         changeSprite();
         transform.position = position;
+        aimAtMouse();
         attack();
     }
 
     private void changeSprite()
     {
-        if(direction == 0)
+        if(aimDirection == 0)
             gameObject.GetComponent<SpriteRenderer>().sprite = up;
-        else if(direction==1)
+        else if(aimDirection==1)
             gameObject.GetComponent<SpriteRenderer>().sprite = left;
-        else if(direction==2)
+        else if(aimDirection==2)
             gameObject.GetComponent<SpriteRenderer>().sprite = down;
-        else if(direction==3)
+        else if(aimDirection==3)
             gameObject.GetComponent<SpriteRenderer>().sprite = right;
 
     }
@@ -189,5 +194,37 @@ public class playerScript : MonoBehaviour
             Instantiate(projectile, transform.position, transform.rotation);
             numOfProjectiles++;
         }
+    }
+
+    //aiming using the mouse cursor
+    void aimAtMouse()
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        //May need these
+        // && Math.Abs(mousePos.x) > Math.Abs(mousePos.y)
+        // && Math.Abs(mousePos.y) > Math.Abs(mousePos.x)
+        //up
+        if (mousePos.y >= transform.position.y && Math.Abs(mousePos.y) > Math.Abs(mousePos.x))
+        {
+            aimDirection = 0;
+        }
+        //left
+        else if (mousePos.x < transform.position.x && Math.Abs(mousePos.x) > Math.Abs(mousePos.y))
+        {
+            aimDirection = 1;
+        }
+        //down
+        else if (mousePos.y < transform.position.y && Math.Abs(mousePos.y) > Math.Abs(mousePos.x))
+        {
+            aimDirection = 2;
+        }
+        //right
+        else if (mousePos.x > transform.position.x && Math.Abs(mousePos.x) > Math.Abs(mousePos.y))
+        {
+            aimDirection = 3;
+        }
+
+        Debug.Log(mousePos.x + " : " + mousePos.y);
     }
 }
