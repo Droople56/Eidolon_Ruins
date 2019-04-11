@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gameManagerScript : MonoBehaviour
 {
@@ -27,14 +28,33 @@ public class gameManagerScript : MonoBehaviour
 
     [HideInInspector] public int score;
     [HideInInspector] public Text scoreText;
+    [HideInInspector] public Text waveText;
+
+    GameObject gameOverText;
+    playerScript playerScript;
+    GameObject restartButton;
     
     // Use this for initialization
     void Awake()
     {
+        cores = new List<GameObject>();
+
+        playerScript = GameObject.Find("Player").GetComponent<playerScript>();
+
         score = 0;
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        waveText = GameObject.Find("WaveText").GetComponent<Text>();
+        gameOverText = GameObject.Find("GameOverText");
+        gameOverText.SetActive(false);
+
+
+        restartButton = GameObject.Find("Restart Button");
+        restartButton.SetActive(false);
+
 
         waveNumber = 0;
+        waveText.text = "Wave " + waveNumber;
+
         spawnLocation = Vector2.zero;
         spawnTimer = 0;
 
@@ -60,7 +80,9 @@ public class gameManagerScript : MonoBehaviour
     {
         //increases wave number, sets number of enemies to be spawned and syncs enemies remaining with that number, resets spawn timer to zero
         waveNumber++;
-        numEnemiesToSpawn = waveNumber +2;
+        waveText.text = "Wave " + waveNumber;
+
+        numEnemiesToSpawn = waveNumber + 2;
         enemiesRemaining = numEnemiesToSpawn;
         spawnTimer = 0;
 
@@ -139,7 +161,33 @@ public class gameManagerScript : MonoBehaviour
             ShopScreen();
             //call method that is while loop containing the shop
         }
+
+        if(cores.Count == 0)
+        {
+            GameOver();
+        }
             
 
+    }
+
+    private void GameOver()
+    {
+        //disable player script
+        playerScript.enabled = false;
+
+        //display gameOver text & restart button
+        gameOverText.GetComponent<Text>().text = "Game Over\nYou reached Wave " + waveNumber;
+        gameOverText.SetActive(true);
+        restartButton.SetActive(true);
+
+        //disable other text items
+        scoreText.gameObject.SetActive(false);
+        waveText.gameObject.SetActive(false);
+    }
+
+    public void ReturnToMenu()
+    {
+        //load the menu screen
+        SceneManager.LoadScene(0);
     }
 }

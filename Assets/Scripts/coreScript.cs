@@ -7,13 +7,13 @@ public class coreScript : MonoBehaviour
 {
     // Start is called before the first frame update
     gameManagerScript manager;
-    public int health;
+    public int health = 50;
     
     public Text healthText;
     void Start()
     {
-
-
+        manager = GameObject.Find("gameManager").GetComponent<gameManagerScript>();
+        manager.cores.Add(this.gameObject);
         health = 50;
     }
 
@@ -34,6 +34,7 @@ public class coreScript : MonoBehaviour
     {
         if (health <= 0)
         {
+            manager.cores.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
     }

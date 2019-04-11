@@ -36,6 +36,9 @@ public class storeScript : MonoBehaviour
         Debug.LogWarning(pSpeedText.GetComponent<Text>().text);
 
         pDamageText = GameObject.Find("pDamageText").GetComponent<Text>();
+
+        pSpeedText.transform.parent.gameObject.SetActive(false);
+        pDamageText.transform.parent.gameObject.SetActive(false);
     }
 
     //additional optional upgrade
