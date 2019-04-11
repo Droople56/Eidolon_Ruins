@@ -29,18 +29,19 @@ public class gameManagerScript : MonoBehaviour
     [HideInInspector] public int score;
     [HideInInspector] public Text scoreText;
     [HideInInspector] public Text waveText;
-
+    storeScript strScrpt;
     GameObject gameOverText;
     playerScript playerScript;
     GameObject restartButton;
-    
+    GameObject fireRateButton;
+    GameObject damageUpgradeButton;
     // Use this for initialization
     void Awake()
     {
         cores = new List<GameObject>();
 
         playerScript = GameObject.Find("Player").GetComponent<playerScript>();
-
+        strScrpt = GameObject.Find("gameManager").GetComponent<storeScript>();
         score = 0;
         scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         waveText = GameObject.Find("WaveText").GetComponent<Text>();
@@ -49,8 +50,12 @@ public class gameManagerScript : MonoBehaviour
 
 
         restartButton = GameObject.Find("Restart Button");
-        restartButton.SetActive(false);
+        fireRateButton = GameObject.Find("Projectile Speed Button");
+        damageUpgradeButton = GameObject.Find("Projectile Damage Button");
 
+        restartButton.SetActive(false);
+        fireRateButton.SetActive(false);
+        damageUpgradeButton.SetActive(false);
 
         waveNumber = 0;
         waveText.text = "Wave " + waveNumber;
@@ -88,9 +93,10 @@ public class gameManagerScript : MonoBehaviour
 
         //disable button
         nextWaveButton.SetActive(false);
-
+        fireRateButton.SetActive(false);
+        damageUpgradeButton.SetActive(false);
         //enable towers
-        foreach(towerScript tower in towerList)
+        foreach (towerScript tower in towerList)
         {
             tower.enabled = true;
         }
@@ -106,6 +112,9 @@ public class gameManagerScript : MonoBehaviour
 
         //show the next wave button
         nextWaveButton.SetActive(true);
+        fireRateButton.SetActive(true);
+        damageUpgradeButton.SetActive(true);
+        
     }
 
     //method to spawn enemies on outer ring on random tiles (outer ring is ((-3,-2) (-3,2) (3,-2) (3,2)) only spawn on tenths aka (-3,.6) or (.3,2)

@@ -453,7 +453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 391, y: 234.8}
+  m_AnchoredPosition: {x: 424, y: 234.8}
   m_SizeDelta: {x: 160, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &67014391
@@ -1522,7 +1522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 391, y: 177}
+  m_AnchoredPosition: {x: 424, y: 177}
   m_SizeDelta: {x: 160, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364171590
@@ -1956,6 +1956,8 @@ MonoBehaviour:
   score: 0
   scoreText: {fileID: 0}
   waveText: {fileID: 0}
+  fireRateButton: {fileID: 67014391}
+  damageUpgradeButton: {fileID: 364171590}
 --- !u!4 &531476295
 Transform:
   m_ObjectHideFlags: 0

@@ -37,8 +37,8 @@ public class storeScript : MonoBehaviour
 
         pDamageText = GameObject.Find("pDamageText").GetComponent<Text>();
 
-        pSpeedText.transform.parent.gameObject.SetActive(false);
-        pDamageText.transform.parent.gameObject.SetActive(false);
+        //pSpeedText.transform.parent.gameObject.SetActive(false);
+        //pDamageText.transform.parent.gameObject.SetActive(false);
     }
 
     //additional optional upgrade
@@ -103,7 +103,8 @@ public class storeScript : MonoBehaviour
     private void Update()
     {
         //update text
-        pSpeedText.text = "Projectile Speed\n" + pSpeedCost;
-        pDamageText.text = "Projectile Damage\n" + pDamageCost;
+        pSpeedText.text = "Projectile Speed " + pSpeedCost;
+        pDamageText.text = "Projectile Damage " + pDamageCost;
+        
     }
 }
